@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, Tabs, Button, Empty, Badge, Typography } from 'antd'
+import { Card, Tabs, Button, Empty, Badge, Typography, Space } from 'antd'
 import { DeleteOutlined, CheckCircleOutlined, DownloadOutlined, ExclamationCircleOutlined, ClockCircleOutlined } from '@ant-design/icons'
 import { useTranslation } from 'react-i18next'
 import { useDownloadStore } from '../../stores/downloadStore'

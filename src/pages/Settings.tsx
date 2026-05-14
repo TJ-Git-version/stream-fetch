@@ -1,6 +1,6 @@
 import React from 'react'
 import { Card, Form, Input, InputNumber, Select, Button, Space, Typography, Divider, message } from 'antd'
-import { FolderOutlined, SaveOutlined, GlobalOutlined, ThemeOutlined, DownloadOutlined, InfoCircleOutlined } from '@ant-design/icons'
+import { FolderOutlined, SaveOutlined, GlobalOutlined, BulbOutlined, DownloadOutlined, InfoCircleOutlined } from '@ant-design/icons'
 import { useTranslation } from 'react-i18next'
 import { useSettingsStore } from '../stores/settingsStore'
 
@@ -133,7 +133,7 @@ export const Settings: React.FC = () => {
           <Form.Item
             label={
               <Space>
-                <ThemeOutlined />
+                <BulbOutlined />
                 <span>{t('settings.theme')}</span>
               </Space>
             }
