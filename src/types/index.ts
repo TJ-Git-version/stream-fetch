@@ -21,6 +21,7 @@ export interface DownloadTask {
   id: string
   videoInfo: VideoInfo
   quality: string
+  format?: 'mp4' | 'mp3'
   status: 'pending' | 'downloading' | 'paused' | 'completed' | 'failed'
   progress: number // 0-100
   speed: number // bytes/s
