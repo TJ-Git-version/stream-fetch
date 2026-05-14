@@ -1,5 +1,4 @@
 import { contextBridge, ipcRenderer } from 'electron'
-import { IPC_CHANNELS } from '../types'
 
 export interface ElectronAPI {
   platform: string
