@@ -1,6 +1,6 @@
 import { contextBridge, ipcRenderer } from 'electron'
+import { IPC_CHANNELS } from '../types'
 
-// 定义暴露给渲染进程的 API 类型
 export interface ElectronAPI {
   platform: string
   versions: {
@@ -8,14 +8,23 @@ export interface ElectronAPI {
     chrome: string
     electron: string
   }
+  invoke: (channel: string, data?: unknown) => Promise<unknown>
+  on: (channel: string, callback: (...args: unknown[]) => void) => void
+  off: (channel: string, callback: (...args: unknown[]) => void) => void
 }
 
-// 暴露安全的 API 到渲染进程
 contextBridge.exposeInMainWorld('electronAPI', {
   platform: process.platform,
   versions: {
     node: process.versions.node,
     chrome: process.versions.chrome,
-    electron: process.versions.electron
-  }
+    electron: process.versions.electron,
+  },
+  invoke: (channel: string, data?: unknown) => ipcRenderer.invoke(channel, data),
+  on: (channel: string, callback: (...args: unknown[]) => void) => {
+    ipcRenderer.on(channel, (_event, ...args) => callback(...args))
+  },
+  off: (channel: string, callback: (...args: unknown[]) => void) => {
+    ipcRenderer.removeListener(channel, callback)
+  },
 } as ElectronAPI)
