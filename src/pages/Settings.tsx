@@ -13,10 +13,10 @@ export const Settings: React.FC = () => {
   const [form] = Form.useForm()
 
   const handleSelectPath = async () => {
-    const path = await window.electronAPI?.selectPath?.()
+    const path = await window.electronAPI?.invoke?.('select-download-path')
     if (path) {
       form.setFieldValue('downloadPath', path)
-      updateSettings({ downloadPath: path })
+      updateSettings({ downloadPath: path as string })
       message.success('下载目录已更新')
     }
   }
