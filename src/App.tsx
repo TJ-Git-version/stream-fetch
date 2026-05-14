@@ -1,14 +1,21 @@
-function App() {
+import React from 'react'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { MainLayout } from './layouts/MainLayout'
+import { Home } from './pages/Home'
+import { Downloads } from './pages/Downloads'
+import { Settings } from './pages/Settings'
+
+function App(): JSX.Element {
   return (
-    <div style={{ padding: '20px', fontFamily: 'system-ui, sans-serif' }}>
-      <h1>Stream Fetch</h1>
-      <p>视频下载工具</p>
-      <div id="app-info">
-        <p>Platform: {window.electronAPI?.platform || 'Web'}</p>
-        <p>Electron: {window.electronAPI?.versions?.electron || 'N/A'}</p>
-        <p>Node: {window.electronAPI?.versions?.node || 'N/A'}</p>
-      </div>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<MainLayout />}>
+          <Route index element={<Home />} />
+          <Route path="downloads" element={<Downloads />} />
+          <Route path="settings" element={<Settings />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   )
 }
 
