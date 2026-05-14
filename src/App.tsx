@@ -1,6 +1,4 @@
-import React from 'react'
-
-function App(): JSX.Element {
+function App() {
   return (
     <div style={{ padding: '20px', fontFamily: 'system-ui, sans-serif' }}>
       <h1>Stream Fetch</h1>
