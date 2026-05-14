@@ -5,7 +5,7 @@ import { Home } from './pages/Home'
 import { Downloads } from './pages/Downloads'
 import { Settings } from './pages/Settings'
 
-function App(): JSX.Element {
+function App(): React.ReactElement {
   return (
     <BrowserRouter>
       <Routes>

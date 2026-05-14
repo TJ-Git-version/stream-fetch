@@ -1,8 +1,8 @@
 import React from 'react'
-import { Card, Form, InputNumber, Select, Button, Space, Typography, Divider } from 'antd'
+import { Card, Form, Input, InputNumber, Select, Button, Space, Typography, Divider } from 'antd'
 import { FolderOutlined } from '@ant-design/icons'
 import { useTranslation } from 'react-i18next'
-import { useSettingsStore } from '../../stores/settingsStore'
+import { useSettingsStore } from '../stores/settingsStore'
 
 const { Title, Text } = Typography
 const { Option } = Select
@@ -38,7 +38,7 @@ export const Settings: React.FC = () => {
           <Form.Item label={t('settings.downloadPath')} name="downloadPath">
             <Space.Compact style={{ width: '100%' }}>
               <Form.Item name="downloadPath" noStyle>
-                <Input.ReadOnly style={{ width: 'calc(100% - 100px)' }} />
+                <Input readOnly style={{ width: 'calc(100% - 100px)' }} />
               </Form.Item>
               <Button icon={<FolderOutlined />} onClick={handleSelectPath}>
                 {t('settings.selectPath')}

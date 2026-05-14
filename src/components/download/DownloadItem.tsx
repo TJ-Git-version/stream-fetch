@@ -1,6 +1,6 @@
 import React from 'react'
 import { Card, Progress, Space, Button, Typography, Tag } from 'antd'
-import { PauseOutlined, PlayOutlined, DeleteOutlined } from '@ant-design/icons'
+import { PauseOutlined, PlayCircleOutlined, DeleteOutlined } from '@ant-design/icons'
 import { useTranslation } from 'react-i18next'
 import { DownloadTask } from '../../types'
 
@@ -35,7 +35,6 @@ export const DownloadItem: React.FC<DownloadItemProps> = ({
   task,
   onPause,
   onResume,
-  onCancel,
   onRemove,
 }) => {
   const { t } = useTranslation()
@@ -74,7 +73,7 @@ export const DownloadItem: React.FC<DownloadItemProps> = ({
               </Button>
             )}
             {task.status === 'paused' && (
-              <Button size="small" icon={<PlayOutlined />} onClick={() => onResume(task.id)}>
+              <Button size="small" icon={<PlayCircleOutlined />} onClick={() => onResume(task.id)}>
                 {t('download.resume')}
               </Button>
             )}

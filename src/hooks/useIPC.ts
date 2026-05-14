@@ -7,7 +7,7 @@ export const useIPC = () => {
 
   // 监听下载进度更新
   useEffect(() => {
-    const handleProgress = (_event: unknown, data: { id: string; progress: number; speed: number; downloaded: number }) => {
+    const handleProgress = (data: { id: string; progress: number; speed: number; downloaded: number }) => {
       updateTask(data.id, {
         progress: data.progress,
         speed: data.speed,
@@ -16,23 +16,23 @@ export const useIPC = () => {
       })
     }
 
-    const handleComplete = (_event: unknown, data: { id: string }) => {
+    const handleComplete = (data: { id: string }) => {
       updateTask(data.id, { status: 'completed', progress: 100 })
     }
 
-    const handleError = (_event: unknown, data: { id: string; error: string }) => {
+    const handleError = (data: { id: string; error: string }) => {
       updateTask(data.id, { status: 'failed', error: data.error })
     }
 
     // 注册 IPC 监听
-    window.electronAPI?.on?.(IPC_CHANNELS.DOWNLOAD_PROGRESS, handleProgress)
-    window.electronAPI?.on?.(IPC_CHANNELS.DOWNLOAD_COMPLETE, handleComplete)
-    window.electronAPI?.on?.(IPC_CHANNELS.DOWNLOAD_ERROR, handleError)
+    window.electronAPI?.on?.(IPC_CHANNELS.DOWNLOAD_PROGRESS, handleProgress as (...args: unknown[]) => void)
+    window.electronAPI?.on?.(IPC_CHANNELS.DOWNLOAD_COMPLETE, handleComplete as (...args: unknown[]) => void)
+    window.electronAPI?.on?.(IPC_CHANNELS.DOWNLOAD_ERROR, handleError as (...args: unknown[]) => void)
 
     return () => {
-      window.electronAPI?.off?.(IPC_CHANNELS.DOWNLOAD_PROGRESS, handleProgress)
-      window.electronAPI?.off?.(IPC_CHANNELS.DOWNLOAD_COMPLETE, handleComplete)
-      window.electronAPI?.off?.(IPC_CHANNELS.DOWNLOAD_ERROR, handleError)
+      window.electronAPI?.off?.(IPC_CHANNELS.DOWNLOAD_PROGRESS, handleProgress as (...args: unknown[]) => void)
+      window.electronAPI?.off?.(IPC_CHANNELS.DOWNLOAD_COMPLETE, handleComplete as (...args: unknown[]) => void)
+      window.electronAPI?.off?.(IPC_CHANNELS.DOWNLOAD_ERROR, handleError as (...args: unknown[]) => void)
     }
   }, [updateTask])
 
